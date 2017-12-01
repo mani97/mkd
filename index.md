@@ -1,37 +1,79 @@
-## Welcome to GitHub Pages
+Hi! buddy's Here i'm going to teach how to create a personal Desktop hotspot app(bat file) using Text Document.
 
-You can use the [editor on GitHub](https://github.com/mani97/mkd/edit/master/index.md) to maintain and preview the content for your website in Markdown files.
-
-Whenever you commit to this repository, GitHub Pages will run [Jekyll](https://jekyllrb.com/) to rebuild the pages in your site, from the content in your Markdown files.
-
-### Markdown
-
-Markdown is a lightweight and easy-to-use syntax for styling your writing. It includes conventions for
-
-```markdown
-Syntax highlighted code block
-
-# Header 1
-## Header 2
-### Header 3
-
-- Bulleted
-- List
-
-1. Numbered
-2. List
-
-**Bold** and _Italic_ and `Code` text
-
-[Link](url) and ![Image](src)
-```
-
-For more details see [GitHub Flavored Markdown](https://guides.github.com/features/mastering-markdown/).
-
-### Jekyll Themes
-
-Your Pages site will use the layout and styles from the Jekyll theme you have selected in your [repository settings](https://github.com/mani97/mkd/settings). The name of this theme is saved in the Jekyll `_config.yml` configuration file.
-
-### Support or Contact
-
-Having trouble with Pages? Check out our [documentation](https://help.github.com/categories/github-pages-basics/) or [contact support](https://github.com/contact) and we’ll help you sort it out.
+procedure:
+step 1: Open a new text document file and then type the following command or copy and paste.If you want to change your hotspot user name and password please change the code below.
+User name: MK-WiFi(mentioned in bold letter in the code)
+Password: superuser456 (key)
+=============================================code=======================================================
+@echo off
+:CONFIRM
+echo select what you want from me(on-N/off-F/details-D)
+set /p "cho=>"
+if %cho%==on goto on
+if %cho%==N goto on
+if %cho%==n goto on
+if %cho%==F goto off
+if %cho%==f goto off
+if %cho%==off goto off
+if %cho%==details goto details
+if %cho%==ON goto on
+if %cho%==OFF goto off
+if %cho%==DETAILS goto details
+if %cho%==d goto details
+if %cho%==D goto details
+if %cho%==C goto connected clients
+if %cho%==connected clients goto connected clients
+if %cho%==CONNECTED CLIENTS goto connected clients
+if %cho%==c goto connected clients
+goto invalid choice.
+goto CONFIRM
+:details
+netsh wlan show hostednetwork | findstr -i status
+echo SSID Name
+netsh wlan show hostednetwork | findstr -i " ssid "
+netsh wlan show hostednetwork setting=security
+:on
+netsh wlan set hostednetwork mode=allow ssid=MK-WIFI key=superuser456
+netsh wlan start hostednetwork
+:CONFIRM
+echo select what you want from me(off-F/connected clients-c)
+set /p "cho=>"
+if %cho%==off goto off
+if %cho%==F goto off
+if %cho%==f goto off
+if %cho%==d goto details
+if %cho%==D goto details
+if %cho%==C goto connected clients
+if %cho%==connected clients goto connected clients
+if %cho%==CONNECTED CLIENTS goto connected clients
+if %cho%==c goto connected clients
+if %cho%==OFF goto off
+goto invalid choice.
+goto CONFIRM
+:off
+netsh wlan stop hostednetwork
+goto end
+:connected clients
+netsh wlan show hostednetwork | findstr -i status
+echo SSID Name
+netsh wlan show hostednetwork | findstr -i " ssid "
+netsh wlan show hostednetwork setting=security
+echo Connected clients
+arp -a | findstr -i 192.168.173 | findstr /V 255 | findstr /V 192.168.173.1
+:CONFIRM
+echo select what you want from me(off-F)
+set /p "cho=>"
+if %cho%==off goto off
+if %cho%==OFF goto off
+if %cho%==f goto off
+if %cho%==F goto off
+goto invalid choice.
+goto CONFIRM
+:off
+netsh wlan stop hostednetwork
+goto end
+==========================================================================================================
+step 2: Then save As to bat file format (file name end with .bat) in desktop.
+step 3: Now you seen a new file looking like a settings icon.
+step 4: Then you run the file with administrator privilege.This option found on right click the file(run as administrator)
+step 5: Now new command prompt(cmd) prompted. Then you start the hotspot, type on,ON,N,n anything in the showed prompt format.
