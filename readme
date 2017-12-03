@@ -3,8 +3,8 @@ procedure I :Download the .bat file and run in administrator rights.
 (OR)
 procedure II:
 step 1: Open a new text document file and then type the following command or copy and paste.If you want to change your hotspot user name and password please change the code below.
-User name: MK-WiFi(mentioned in bold letter in the code)
-Password: superuser456 (key)
+User name: MK-WiFi
+Password: superuser456 (key) 
 =============================================code=======================================================
 @echo off
 :CONFIRM
